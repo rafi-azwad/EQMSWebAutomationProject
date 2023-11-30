@@ -1,0 +1,117 @@
+package Core;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
+
+
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import static Core.BaseURL.baseURL;
+
+public class BrowserHelper {
+    public static WebDriver driver;
+
+    public WebDriver chrome() {
+
+        Map<String, Integer> contentSettings = new HashMap<String, Integer>();
+        Map<String, Object> profile = new HashMap<String, Object>();
+        Map<String, Object> prefs = new HashMap<String, Object>();
+
+        // options : default - 0, allow - 1, block - 2
+        contentSettings.put("notifications", 2);
+        contentSettings.put("geolocation", 2);
+        profile.put("managed_default_content_settings", contentSettings);
+        prefs.put("profile", profile);
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver(options);
+       // driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        driver.get(baseURL);
+        driver.manage().window().maximize();
+        return driver;
+
+    }
+
+    public WebDriver firefox() {
+
+        // disable firefox notification - false:enabled - true:disabled
+        FirefoxOptions options = new FirefoxOptions();
+        options.setProfile(new FirefoxProfile());
+        options.addPreference("dom.webnotifications.enabled", false);
+        options.addPreference("geo.enabled", true);
+        options.addPreference("geo.prompt.testing", true);
+        options.addPreference("geo.prompt.testing.allow", true);
+        WebDriverManager.firefoxdriver().setup();
+        driver = new FirefoxDriver(options);
+       // driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        driver.get(baseURL);
+        driver.manage().window().maximize();
+
+        return driver;
+    }
+
+    public void closeTab() {
+
+        driver.close();
+    }
+
+    public void closeBrowser() {
+
+        driver.quit();
+    }
+
+    public static void takeScreenshot(String fileName) {
+        try {
+            File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            String currentDir = System.getProperty("user.dir") + "/src/screenshots/";
+            FileUtils.copyFile(scrFile, new File(currentDir + fileName + System.currentTimeMillis() + ".png"));
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+        @AfterClass
+        public static void successfulScreenshot(ITestResult result) {
+
+            if (ITestResult.SUCCESS == result.getStatus()) {
+                takeScreenshot(result.getMethod().getMethodName());
+            }
+        }
+        @AfterClass
+        public static void failScreenshot(ITestResult result){
+
+            if (ITestResult.FAILURE == result.getStatus()){
+                takeScreenshot(result.getMethod().getMethodName());
+            }
+    }
+
+
+
+
+    }
+
+
+
+
+
