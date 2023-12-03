@@ -1,0 +1,87 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2023-11-30T10:43:50.849Z",
+        "line": 12,
+        "name": "Login with valid data",
+        "description": "",
+        "id": "eqms-login;login-with-valid-data;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 5422000000,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "user in the login page",
+            "match": {
+              "location": "EQMSStepDefinition.LoginStepDefinition.userInTheLoginPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 191000000,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "user enter \u0027Rafi\u0027 and \u0027123\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027Rafi\u0027",
+                  "offset": 11
+                },
+                {
+                  "val": "\u0027123\u0027",
+                  "offset": 22
+                }
+              ],
+              "location": "EQMSStepDefinition.LoginStepDefinition.userEnterAnd(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 239000000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "click login button",
+            "match": {
+              "location": "EQMSStepDefinition.LoginStepDefinition.clickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 2858000000,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "successfully navigate to the dashboard",
+            "match": {
+              "location": "EQMSStepDefinition.LoginStepDefinition.successfullyNavigateToTheDashboard()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@login"
+          }
+        ]
+      }
+    ],
+    "name": "EQMS Login",
+    "description": "",
+    "id": "eqms-login",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/Features/01_login.feature",
+    "tags": []
+  }
+]

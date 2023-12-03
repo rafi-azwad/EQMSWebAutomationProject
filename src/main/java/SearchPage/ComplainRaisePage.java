@@ -20,16 +20,17 @@ public class ComplainRaisePage {
     }
 
 
-    public void clickCustomerComplain() throws InterruptedException {
+    public void clickCustomerComplain()  {
 
-        //WebElement element = (new WebDriverWait(driver, Duration.ofSeconds(15)))
-
-      /*  Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+       // Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
 
-        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()= 'Customer Complaints']")));
+      /*  WebElement element = (new WebDriverWait(driver, Duration.ofSeconds(15))).
+
+                until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()= 'Customer Complaints']")));
         JavascriptExecutor js = (JavascriptExecutor)driver; //org.openqa.selenium.ElementClickInterceptedException
-        js.executeScript("arguments[0].click()", element);*/
+        js.executeScript("arguments[0].click()", element);
+*/
 
         WebElement cc =driver.findElement(By.xpath("//*[text()= 'Customer Complaints']"));
         JavascriptExecutor js = (JavascriptExecutor)driver; //org.openqa.selenium.ElementClickInterceptedException
@@ -54,7 +55,7 @@ public class ComplainRaisePage {
 
 
         driver.findElement(By.xpath("//input[@id='TITLE_OF_COMPLAINT']")).click();
-        driver.findElement(By.xpath("//input[@id='TITLE_OF_COMPLAINT']")).sendKeys("Packet1");
+        driver.findElement(By.xpath("//input[@id='TITLE_OF_COMPLAINT']")).sendKeys("complainCheck");
         //sendKeys of complain
 
         //Thread.sleep(2000);
@@ -91,7 +92,8 @@ public class ComplainRaisePage {
 
         Thread.sleep(2000);
         driver.findElement(By.xpath("//button[contains(text(),'Save')]")).click();
-       // driver.findElement(By.xpath("//button[contains(text(),'Submit')]")).click();
+        Thread.sleep(2000);
+        //driver.findElement(By.xpath("//button[contains(text(),'Submit')]")).click();
 
         WebElement cc =driver.findElement(By.xpath("//*[text()= 'Customer Complaints']"));
         JavascriptExecutor js = (JavascriptExecutor)driver; //org.openqa.selenium.ElementClickInterceptedException

@@ -52,6 +52,8 @@ task webRun(type: Test) {
         System.out.println(testValue)
 
 
+
+
         if(testValue.equals("allTest")){
             suites "src/test/allTest.xml"
         }
@@ -61,8 +63,17 @@ task webRun(type: Test) {
         else if(testValue.equals("complainRaiseTest")){
             suites "src/test/complainRaiseTest.xml"
         }
+        else if(testValue.equals("initialAssessmentTest")){
+            suites "src/test/initialAssessmentTest.xml"
+        }
         else if(testValue.equals("reviewInitialAssessmentTest")){
             suites "src/test/reviewInitialAssessmentTest.xml"
+        }
+        else if(testValue.equals("investigationTest")){
+            suites "src/test/investigationTest.xml"
+        }
+        else if(testValue.equals("reviewInvestigationTest")){
+            suites "src/test/reviewInvestigationTest.xml"
         }
 
     }

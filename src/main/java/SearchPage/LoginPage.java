@@ -4,7 +4,7 @@ import org.openqa.selenium.*;
 import org.testng.ITestResult;
 import org.testng.asserts.SoftAssert;
 
-import static Core.BrowserHelper.takeScreenshot;
+
 
 public class LoginPage {
     WebDriver driver;
@@ -27,7 +27,7 @@ public class LoginPage {
        driver.findElement(By.xpath("//*[text()='Login']")).click();
     }
 
-    public void successfullyLogin() throws InterruptedException {
+    public void successfullyLogin()  {
 
         String expect = "Electronic Quality Management System";
         WebElement we = driver.findElement(By.className("display-4"));

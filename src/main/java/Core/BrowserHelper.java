@@ -3,6 +3,7 @@ package Core;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -71,41 +72,15 @@ public class BrowserHelper {
         return driver;
     }
 
-    public void closeTab() {
+    public static void closeTab() {
 
         driver.close();
     }
 
-    public void closeBrowser() {
+    public static void closeBrowser() {
 
         driver.quit();
     }
-
-    public static void takeScreenshot(String fileName) {
-        try {
-            File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            String currentDir = System.getProperty("user.dir") + "/src/screenshots/";
-            FileUtils.copyFile(scrFile, new File(currentDir + fileName + System.currentTimeMillis() + ".png"));
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-        @AfterClass
-        public static void successfulScreenshot(ITestResult result) {
-
-            if (ITestResult.SUCCESS == result.getStatus()) {
-                takeScreenshot(result.getMethod().getMethodName());
-            }
-        }
-        @AfterClass
-        public static void failScreenshot(ITestResult result){
-
-            if (ITestResult.FAILURE == result.getStatus()){
-                takeScreenshot(result.getMethod().getMethodName());
-            }
-    }
-
 
 
 

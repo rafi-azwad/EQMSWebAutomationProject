@@ -1,6 +1,6 @@
 package EQMSStepDefinition;
 
-import Core.ScreenRecorderUtil;
+import Core.ScreenShotUtil;
 import SearchPage.ComplainRaisePage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -14,8 +14,8 @@ public class ComplainRaiseStepDefinition {
 
 
     @Given("click on customer complain option")
-    public void clickOnCustomerComplainOption() throws Exception {
-        ScreenRecorderUtil.startRecord("LoginPage");
+    public void clickOnCustomerComplainOption() {
+
         cc = new ComplainRaisePage(driver);
         cc.clickCustomerComplain();
 
@@ -36,7 +36,8 @@ public class ComplainRaiseStepDefinition {
     @Then("save and submit the information")
     public void saveAndSubmitTheInformation() throws Exception {
         cc.saveAndSubmitComplainRaise();
-        ScreenRecorderUtil.stopRecord();
+        ScreenShotUtil.getScreenshot("complainRaise");
+
     }
 
 }

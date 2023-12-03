@@ -1,5 +1,7 @@
 package EQMSStepDefinition;
 
+import Core.ScreenRecorderUtil;
+import Core.ScreenShotUtil;
 import SearchPage.InitialAssessmentPage;
 import SearchPage.ReviewInitialAssessmentPage;
 import io.cucumber.java.en.And;
@@ -12,17 +14,19 @@ public class ReviewInitialAssessmentStepDefinition {
     InitialAssessmentPage ia;
 
     @When("select review initial assessment")
-    public void selectReviewInitialAssessment() throws InterruptedException {
+    public void selectReviewInitialAssessment() {
         ri = new ReviewInitialAssessmentPage(driver);
         ri.selectReviewOfInitialAssessment();
 
     }
 
     @And("fill in the required review of initial information")
-    public void fillInTheRequiredReviewOfInitialInformation() throws InterruptedException {
+    public void fillInTheRequiredReviewOfInitialInformation()  {
 
         ri.selectComplainNoAndStatus();
+        ScreenShotUtil.getScreenshot("ReviewOfInitialAssessment");
         ri.selectInvestigatorAndType();
-        ri.selectInvestigatorAndType1();
+        ScreenRecorderUtil.stopRecord();
+
     }
 }

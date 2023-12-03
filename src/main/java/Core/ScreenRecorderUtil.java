@@ -42,28 +42,39 @@ public class ScreenRecorderUtil extends ScreenRecorder {
     name + "-" + dateFormat.format(new Date()) + "." + Registry.getInstance().getExtension(fileFormat));
  }
 
- public static void startRecord(String methodName) throws Exception {
-  File file = new File("./test-recordings/");
-  Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-  int width = screenSize.width;
-  int height = screenSize.height;
+ public static void startRecord(String methodName)  {
+  try {
+   File file = new File("./test-recordings/");
+   Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+   int width = screenSize.width;
+   int height = screenSize.height;
 
-  Rectangle captureSize = new Rectangle(0, 0, width, height);
+   Rectangle captureSize = new Rectangle(0, 0, width, height);
 
-  GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().
-    getDefaultScreenDevice()
-    .getDefaultConfiguration();
-  screenRecorder = new ScreenRecorderUtil(gc, captureSize,
-    new Format(MediaTypeKey, MediaType.FILE, MimeTypeKey, MIME_AVI),
-    new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
-      CompressorNameKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE, DepthKey, 24, FrameRateKey,
-      Rational.valueOf(15), QualityKey, 1.0f, KeyFrameIntervalKey, 15 * 60),
-    new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, "black", FrameRateKey, Rational.valueOf(30)),
-    null, file, methodName);
-  screenRecorder.start();
+   GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().
+           getDefaultScreenDevice()
+           .getDefaultConfiguration();
+   screenRecorder = new ScreenRecorderUtil(gc, captureSize,
+           new Format(MediaTypeKey, MediaType.FILE, MimeTypeKey, MIME_AVI),
+           new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
+                   CompressorNameKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE, DepthKey, 24, FrameRateKey,
+                   Rational.valueOf(15), QualityKey, 1.0f, KeyFrameIntervalKey, 15 * 60),
+           new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, "black", FrameRateKey, Rational.valueOf(30)),
+           null, file, methodName);
+   screenRecorder.start();
+  }
+  catch (Exception e){
+   System.out.println(e);
+  }
+
  }
 
- public static void stopRecord() throws Exception {
-  screenRecorder.stop();
+ public static void stopRecord() {
+  try {
+   screenRecorder.stop();
+  }
+  catch (Exception e){
+   System.out.println(e);
+  }
  }
 }

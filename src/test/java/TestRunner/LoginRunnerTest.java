@@ -11,7 +11,9 @@ import org.testng.annotations.Test;
         monochrome = true,
         dryRun = false,
         plugin = {
-                "pretty", "html:build/reports/loginFeature.html"
+                "pretty", "html:build/reports/loginFeature.html",
+               // "json:build/reports/allFeature.json"
+
         })
 
 @Test

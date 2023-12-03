@@ -1,5 +1,6 @@
 package EQMSStepDefinition;
 
+import Core.ScreenShotUtil;
 import SearchPage.InitialAssessmentPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
@@ -20,6 +21,7 @@ public class InitialAssessmentStepDefinition {
     @And("fill in the required initial information")
     public void fillInTheRequiredInitialInformation() throws InterruptedException {
         ia.selectComplainNoAndStatus();
+        ScreenShotUtil.getScreenshot("InitialAssessment");
 
     }
 }
