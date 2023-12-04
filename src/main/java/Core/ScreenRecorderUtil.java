@@ -71,6 +71,7 @@ public class ScreenRecorderUtil extends ScreenRecorder {
 
  public static void stopRecord() {
   try {
+   Thread.sleep(2000);
    screenRecorder.stop();
   }
   catch (Exception e){

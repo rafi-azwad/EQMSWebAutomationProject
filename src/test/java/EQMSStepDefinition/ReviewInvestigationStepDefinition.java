@@ -1,5 +1,6 @@
 package EQMSStepDefinition;
 
+import Core.ScreenShotUtil;
 import SearchPage.ReviewInvestigationPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
@@ -20,6 +21,8 @@ public class ReviewInvestigationStepDefinition {
         rp.selectComplainNoAndStatus();
         rp.selectFunctionalApproval();
         rp.selectQualityApproval();
+        ScreenShotUtil.getScreenshot("reviewInvestigation");
+
 
     }
 }

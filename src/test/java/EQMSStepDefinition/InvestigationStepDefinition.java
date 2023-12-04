@@ -1,5 +1,6 @@
 package EQMSStepDefinition;
 
+import Core.ScreenShotUtil;
 import SearchPage.InvestigationPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
@@ -18,7 +19,9 @@ public class InvestigationStepDefinition {
     @And("fill in the required investigation information")
     public void fillInTheRequiredInvestigationInformation() {
         ip.selectComplainNo();
+        ScreenShotUtil.getScreenshot("investigation");
         ip.selectInvestigationAndCAPA();
+
 
     }
 }

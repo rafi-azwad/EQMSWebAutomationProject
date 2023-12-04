@@ -6,8 +6,9 @@ import org.testng.annotations.Test;
 
 @CucumberOptions(
         features = {"src/test/resources/Features"},
-        tags = "@login or @complainRaise or @initialAssessment or @reviewInitialAssessment" +
-                "or @investigation @reviewInvestigation",
+        tags = "@login or @complainRaise or @initialAssessment or @reviewInitialAssessment " +
+                "or @investigation or @reviewInvestigation or @functionalApproval or @qualityApproval",
+
         glue = {"EQMSStepDefinition"},
         monochrome = true,
         dryRun = false,

@@ -30,13 +30,14 @@ public class ComplainRaiseStepDefinition {
     @And("fill in the required information")
     public void fillInTheRequiredInformation() throws InterruptedException {
         cc.addComplainRaiseInformation();
+        ScreenShotUtil.getScreenshot("complainRaise");
 
     }
 
     @Then("save and submit the information")
     public void saveAndSubmitTheInformation() throws Exception {
         cc.saveAndSubmitComplainRaise();
-        ScreenShotUtil.getScreenshot("complainRaise");
+
 
     }
 

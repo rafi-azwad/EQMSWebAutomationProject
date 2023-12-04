@@ -75,6 +75,12 @@ task webRun(type: Test) {
         else if(testValue.equals("reviewInvestigationTest")){
             suites "src/test/reviewInvestigationTest.xml"
         }
+        else if(testValue.equals("funtionalApprovalTest")){
+            suites "src/test/funtionalApprovalTest.xml"
+        }
+        else if(testValue.equals("qualityApprovalTest")){
+            suites "src/test/qualityApprovalTest.xml"
+        }
 
     }
 }

@@ -24,9 +24,8 @@ public class ReviewInitialAssessmentStepDefinition {
     public void fillInTheRequiredReviewOfInitialInformation()  {
 
         ri.selectComplainNoAndStatus();
-        ScreenShotUtil.getScreenshot("ReviewOfInitialAssessment");
         ri.selectInvestigatorAndType();
-        ScreenRecorderUtil.stopRecord();
+        ScreenShotUtil.getScreenshot("ReviewOfInitialAssessment");
 
     }
 }

@@ -20,7 +20,7 @@ public class LoginStepDefinition {
 
     @Given("user in the login page")
     public void userInTheLoginPage() {
-        //ScreenRecorderUtil.startRecord("ALL Record");
+        ScreenRecorderUtil.startRecord("ALL Record");
         BrowserHelper bhp = new BrowserHelper();
         driver = bhp.chrome();
 
@@ -35,7 +35,7 @@ public class LoginStepDefinition {
 
     @And("click login button")
     public void clickLoginButton()  {
-        //ScreenShotUtil.getScreenshot("login credential");
+        ScreenShotUtil.getScreenshot("login credential");
         lp.loginButton();
 
     }
@@ -44,7 +44,7 @@ public class LoginStepDefinition {
     public void successfullyNavigateToTheDashboard() {
 
         lp.successfullyLogin();
-       // ScreenShotUtil.getScreenshot("login successfully");
+        ScreenShotUtil.getScreenshot("login successfully");
 
     }
 

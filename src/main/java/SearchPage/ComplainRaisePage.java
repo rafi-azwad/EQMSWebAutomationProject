@@ -93,7 +93,7 @@ public class ComplainRaisePage {
         Thread.sleep(2000);
         driver.findElement(By.xpath("//button[contains(text(),'Save')]")).click();
         Thread.sleep(2000);
-        //driver.findElement(By.xpath("//button[contains(text(),'Submit')]")).click();
+        driver.findElement(By.xpath("//button[contains(text(),'Submit')]")).click();
 
         WebElement cc =driver.findElement(By.xpath("//*[text()= 'Customer Complaints']"));
         JavascriptExecutor js = (JavascriptExecutor)driver; //org.openqa.selenium.ElementClickInterceptedException

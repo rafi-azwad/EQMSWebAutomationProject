@@ -7,7 +7,7 @@ package TestRunner;
 
 @CucumberOptions(
         features = {"src/test/resources/Features/"},
-        tags = "@login or @reviewInitialAssessment",
+        tags = "@reviewInitialAssessment",
         glue = {"EQMSStepDefinition"},
         monochrome = true,
         dryRun = false,

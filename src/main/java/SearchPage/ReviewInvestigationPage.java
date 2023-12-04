@@ -12,7 +12,8 @@ import java.time.Duration;
 
 public class ReviewInvestigationPage {
     WebDriver driver;
-    public ReviewInvestigationPage (WebDriver driver){
+
+    public ReviewInvestigationPage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -46,8 +47,6 @@ public class ReviewInvestigationPage {
             //select complain sendKeys
         }
 
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
-        jse.executeScript("window.scrollBy(0,300)");
 
         driver.findElement(By.name("STATUS")).click();
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//*[text()= '  Approved ']"))));
@@ -56,7 +55,7 @@ public class ReviewInvestigationPage {
 
     }
 
-    public void selectFunctionalApproval(){
+    public void selectFunctionalApproval() throws InterruptedException {
 
 
         driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[10]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1]")).click();
@@ -73,12 +72,16 @@ public class ReviewInvestigationPage {
         iName.click(); //functionalApprovalName
         driver.findElement(By.xpath("//*[text()='Rafi (null)']")).click();
 
-        WebElement iType = wait.until(ExpectedConditions.elementToBeClickable(By.name("REVIEWER_TYPE")));
-        iType.click();
+        WebElement aType = wait.until(ExpectedConditions.elementToBeClickable(By.name("REVIEWER_TYPE")));
+        aType.click();
         driver.findElement(By.xpath("//*[text()='Lead']")).click();
 
     }
-    public void selectQualityApproval() throws InterruptedException {
+
+    public void selectQualityApproval() {
+
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("window.scrollBy(0,300)");
 
 
         WebElement plusIcon = driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[11]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[6]/div[2]/button[1]/img[1]"));
@@ -86,18 +89,19 @@ public class ReviewInvestigationPage {
         js.executeScript("arguments[0].click()", plusIcon);
 
 
-
         Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-
-        WebElement iName = wait.until(ExpectedConditions.elementToBeClickable(By.name("USER_ID")));
+        WebElement iName = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[11]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/select[1]")));
         iName.click();  //qualityApprovalName
-        driver.findElement(By.xpath("//*[text()='Rafi (null)']")).click();
 
-        WebElement iType = wait.until(ExpectedConditions.elementToBeClickable(By.name("REVIEWER_TYPE")));
-        iType.click();
-        driver.findElement(By.xpath("//*[text()='Lead']")).click();
+        WebElement text = driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[11]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/select[1]/option[2]"));
+        text.click();
+
+        WebElement aType = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[11]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[5]/select[1]")));
+        aType.click();
+        driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[11]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[5]/select[1]/option[2]")).click();
 
     }
-
 }
+
+
