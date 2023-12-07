@@ -20,7 +20,7 @@ public class LoginStepDefinition {
 
     @Given("user in the login page")
     public void userInTheLoginPage() {
-        ScreenRecorderUtil.startRecord("Headless ALL Record");
+        ScreenRecorderUtil.startRecord("Record of All Test");
         BrowserHelper bhp = new BrowserHelper();
         driver = bhp.chrome();
         //driver = bhp.headlessBrowser();
