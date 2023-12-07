@@ -2,7 +2,7 @@
 <suite name="Suite">
     <test name="webTest">
         <classes>
-            <class name="TestRunner.ComplainRaiseRunnerTest" />
+            <class name="TestRunner.CAPAStatusReviewRunnerTest" />
         </classes>
     </test>
 

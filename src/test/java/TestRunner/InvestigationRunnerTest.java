@@ -1,4 +1,3 @@
-
 package TestRunner;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
@@ -7,7 +6,7 @@ import org.testng.annotations.Test;
 
 @CucumberOptions(
         features = {"src/test/resources/Features/"},
-        tags = "@investigation",
+        tags = "@login or @investigation",
         glue = {"EQMSStepDefinition"},
         monochrome = true,
         dryRun = false,

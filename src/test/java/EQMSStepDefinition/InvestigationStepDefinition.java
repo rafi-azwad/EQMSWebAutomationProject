@@ -20,6 +20,10 @@ public class InvestigationStepDefinition {
     public void fillInTheRequiredInvestigationInformation() {
         ip.selectComplainNo();
         ScreenShotUtil.getScreenshot("investigation");
+        ip.correctionAction();
+        ScreenShotUtil.getScreenshot("correction Action");
+        ip.preventionAction();
+        ScreenShotUtil.getScreenshot("prevention Action");
         ip.selectInvestigationAndCAPA();
 
 

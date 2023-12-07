@@ -1,4 +1,4 @@
-Feature: Customer Complain
+Feature: Customer Complains
 
   @reviewInitialAssessment
   Scenario: Add review initial assessment

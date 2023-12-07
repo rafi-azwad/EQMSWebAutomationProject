@@ -10,8 +10,6 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
     implementation 'org.testng:testng:6.14.3'
 
@@ -52,8 +50,6 @@ task webRun(type: Test) {
         System.out.println(testValue)
 
 
-
-
         if(testValue.equals("allTest")){
             suites "src/test/allTest.xml"
         }
@@ -80,6 +76,12 @@ task webRun(type: Test) {
         }
         else if(testValue.equals("qualityApprovalTest")){
             suites "src/test/qualityApprovalTest.xml"
+        }
+        else if(testValue.equals("capaStatusReviewTest")){
+            suites "src/test/capaStatusReviewtTest.xml"
+        }
+        else if(testValue.equals("complainStatusTest")){
+            suites "src/test/complainStatusTest.xml"
         }
 
     }

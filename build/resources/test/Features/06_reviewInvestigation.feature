@@ -1,4 +1,4 @@
-Feature: Customer Complain
+Feature: Customer Complains
 
   @reviewInvestigation
   Scenario: Add review investigation

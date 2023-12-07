@@ -1,4 +1,4 @@
-Feature: Customer Complain
+Feature: Customer Complains
 
   @functionalApproval
   Scenario: Add functional approval

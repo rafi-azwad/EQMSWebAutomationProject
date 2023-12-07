@@ -5,10 +5,13 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+
+import static SearchPage.InitialAssessmentPage.complainNo;
 
 public class ReviewInvestigationPage {
     WebDriver driver;
@@ -37,12 +40,12 @@ public class ReviewInvestigationPage {
 
 
         try {
-            driver.findElement(By.xpath("//*[contains(text(), '-- complainCheck')]")).click();
+            driver.findElement(By.xpath("//*[contains(text(), '"+complainNo+"')]")).click();
 
 
         } catch (Exception e) {
             JavascriptExecutor executor = (JavascriptExecutor) driver;
-            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[contains(text(), '-- complainCheck')]")));
+            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[contains(text(), '"+complainNo+"')]")));
 
             //select complain sendKeys
         }
@@ -55,7 +58,7 @@ public class ReviewInvestigationPage {
 
     }
 
-    public void selectFunctionalApproval() throws InterruptedException {
+    public void selectFunctionalApproval() {
 
 
         driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[10]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1]")).click();
@@ -92,10 +95,13 @@ public class ReviewInvestigationPage {
         Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
         WebElement iName = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[11]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/select[1]")));
-        iName.click();  //qualityApprovalName
-
-        WebElement text = driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[11]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/select[1]/option[2]"));
+        /*iName.click();  //qualityApprovalName
+        WebElement text = driver.findElement(By.xpath("//option[contains(text(),'Rafi (null)')]"));
         text.click();
+*/
+        Select select = new Select(iName);
+        select.selectByVisibleText("Rafi (null)");
+
 
         WebElement aType = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[11]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[5]/select[1]")));
         aType.click();

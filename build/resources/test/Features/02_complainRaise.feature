@@ -1,4 +1,4 @@
-Feature: Customer Complain
+Feature: Customer Complains
 
   @complainRaise
   Scenario: Add complain raise issue

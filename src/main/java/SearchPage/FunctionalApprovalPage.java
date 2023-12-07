@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static SearchPage.InitialAssessmentPage.complainNo;
+
 public class FunctionalApprovalPage {
     WebDriver driver;
 
@@ -27,12 +29,12 @@ public class FunctionalApprovalPage {
 
 
         try {
-            driver.findElement(By.xpath("//*[contains(text(), '-- complainCheck')]")).click();
+            driver.findElement(By.xpath("//*[contains(text(), '"+complainNo+"')]")).click();
 
 
         } catch (Exception e) {
             JavascriptExecutor executor = (JavascriptExecutor) driver;
-            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[contains(text(), '-- complainCheck')]")));
+            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[contains(text(), '"+complainNo+"')]")));
 
             //select complain sendKeys
         }

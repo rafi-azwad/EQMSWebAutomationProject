@@ -21,7 +21,6 @@ public class QualityApprovalStepDefinition {
     public void fillInTheRequiredQualityApprovalInformation() {
         qp.selectComplainNoAndStatus();
         ScreenShotUtil.getScreenshot("qualityApproval");
-        ScreenRecorderUtil.stopRecord();
 
     }
 }
