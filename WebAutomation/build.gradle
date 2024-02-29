@@ -1,0 +1,92 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation 'org.testng:testng:6.14.3'
+
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.9'
+    implementation 'org.json:json:20160810'
+    implementation 'io.rest-assured:rest-assured:4.5.0'
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.5.0'
+   // implementation 'org.seleniumhq.selenium:selenium-java:4.18.1'
+
+
+    //implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    implementation 'io.github.bonigarcia:webdrivermanager:5.6.2'
+
+
+    implementation group: 'io.appium', name: 'java-client', version:'8.3.0'
+
+    implementation group: 'org.apache.poi', name: 'poi', version: '3.9'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.9'
+
+    testImplementation 'io.cucumber:cucumber-java:6.10.0'
+    testImplementation 'io.cucumber:cucumber-testng:6.10.0'
+
+   //https://mvnrepository.com/artifact/com.github.stephenc.monte/monte-screen-recorder
+    implementation 'com.github.stephenc.monte:monte-screen-recorder:0.7.7.0'
+
+
+}
+
+task webRun(type: Test) {
+
+
+    useTestNG() {
+        useDefaultListeners = true
+        scanForTestClasses = false
+        testLogging.showStandardStreams = true
+        systemProperties project.properties.subMap(["Type"])
+        String testValue = System.getProperty("Type");
+        System.out.println(testValue)
+
+
+        if(testValue.equals("allTest")){
+            suites "src/test/resources/runXML/customerComplainsRunXML/allTest.xml"
+        }
+        else if(testValue.equals("loginTest")){
+            suites "src/test/loginTest.xml"
+        }
+        else if(testValue.equals("complainRaiseTest")){
+            suites "src/test/complainRaiseTest.xml"
+        }
+        else if(testValue.equals("initialAssessmentTest")){
+            suites "src/test/initialAssessmentTest.xml"
+        }
+        else if(testValue.equals("reviewInitialAssessmentTest")){
+            suites "src/test/reviewInitialAssessmentTest.xml"
+        }
+        else if(testValue.equals("investigationTest")){
+            suites "src/test/investigationTest.xml"
+        }
+        else if(testValue.equals("reviewInvestigationTest")){
+            suites "src/test/reviewInvestigationTest.xml"
+        }
+        else if(testValue.equals("funtionalApprovalTest")){
+            suites "src/test/funtionalApprovalTest.xml"
+        }
+        else if(testValue.equals("qualityApprovalTest")){
+            suites "src/test/qualityApprovalTest.xml"
+        }
+        else if(testValue.equals("capaStatusReviewTest")){
+            suites "src/test/capaStatusReviewtTest.xml"
+        }
+        else if(testValue.equals("complainStatusTest")){
+            suites "src/test/complainStatusTest.xml"
+        }
+        else if(testValue.equals("allChangeControlTest")){
+            suites "src/test/resources/runXML/changeControlRunXML/allChangeControlTest.xml"
+        }
+
+    }
+}
