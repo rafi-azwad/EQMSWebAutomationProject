@@ -14,7 +14,7 @@ public class RaiseChangeControlPage {
 
     public WebDriver driver;
 
-    public static String CCRecordTitle = "rafi7";
+    public static String CCRecordTitle = "finalCheck01";
     public static String CCRecordNo = "";
 
     public RaiseChangeControlPage(WebDriver driver){
@@ -37,7 +37,7 @@ public class RaiseChangeControlPage {
         jse.executeScript("arguments[0].click()",raiseChangeControl);
     }
 
-    public void fillRequiredInformation(){
+    public void fillRequiredInformation() throws InterruptedException {
 
         WebElement titleOfChange = new WebDriverWait(driver, Duration.ofSeconds(30)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='CC_TITLE']")));
@@ -45,12 +45,15 @@ public class RaiseChangeControlPage {
         jse.executeScript("arguments[0].click()",titleOfChange);
         titleOfChange.sendKeys(CCRecordTitle);
 
+        Thread.sleep(1000);
         Select product = new Select(driver.findElement(By.xpath("//select[@ng-change='OnProductChange()']")));
         product.selectByVisibleText(" MESOI771 -- Meril S. B. Soap (W I/C) 25gm (Club Amasan)");
 
+        Thread.sleep(1000);
         Select natureOfChange = new Select(driver.findElement(By.xpath("//select[@id='NATURE_OF_CHANGE']")));
         natureOfChange.selectByVisibleText("Packaging Defect");
 
+        Thread.sleep(1000);
         Select reviewer = new Select(driver.findElement(By.xpath("//select[@id='REVIEWER_ID']")));
         reviewer.selectByVisibleText("Rafi ()");
 
@@ -59,14 +62,20 @@ public class RaiseChangeControlPage {
         attachment.sendKeys("C:\\Users\\Rafi\\Desktop\\eQMS\\WebAutomation\\src\\test\\resources\\File\\logo.jpg");
     }
 
-    public void saveAndSubmit() throws InterruptedException {
+    public void save(){
 
-        /*JavascriptExecutor jse1 = (JavascriptExecutor) driver;
-        jse1.executeScript("window.scrollBy(0,-350)");*/
-
-        WebElement save = new WebDriverWait(driver, Duration.ofSeconds(20)).
+        WebElement save = new WebDriverWait(driver, Duration.ofSeconds(10)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Save')]")));
         save.click();
+    }
+
+    public void submit()  {
+
+        //submit
+        WebElement submit = new WebDriverWait(driver, Duration.ofSeconds(10)).
+                until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Submit')]")));
+        JavascriptExecutor js = (JavascriptExecutor)driver; //org.openqa.selenium.ElementClickInterceptedException
+        js.executeScript("arguments[0].click()", submit);
 
         WebElement getCCRecordNo = new WebDriverWait(driver, Duration.ofSeconds(10)).
                 until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='CC_RAISE_NO']")));
@@ -75,12 +84,8 @@ public class RaiseChangeControlPage {
         CCRecordNo = getCCRecordNo.getAttribute("value");
         System.out.println("CC Record Number: "+CCRecordNo);
 
-
-        //submit
-        WebElement submit = new WebDriverWait(driver, Duration.ofSeconds(30)).
-                until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Submit')]")));
-        JavascriptExecutor js = (JavascriptExecutor)driver; //org.openqa.selenium.ElementClickInterceptedException
-        js.executeScript("arguments[0].click()", submit);
+    }
+    public void closeChangeControl() throws InterruptedException {
 
         WebElement cc =driver.findElement(By.xpath("//span[contains(text(),'Change Control')]"));
         JavascriptExecutor js1 = (JavascriptExecutor)driver; //org.openqa.selenium.ElementClickInterceptedException

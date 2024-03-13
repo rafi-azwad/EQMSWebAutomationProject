@@ -18,7 +18,7 @@ public class QualityFinalReviewStepdefs {
     }
 
     @And("fill in the quality final review information")
-    public void fillInTheQualityFinalReviewInformation() {
+    public void fillInTheQualityFinalReviewInformation() throws InterruptedException {
        qfr.ccRecordNo();
        qfr.reviewSummary();
        qfr.selectStatus();
@@ -26,7 +26,10 @@ public class QualityFinalReviewStepdefs {
 
     @Then("save and submit quality final review's the information")
     public void saveAndSubmitQualityFinalReviewSTheInformation() throws InterruptedException {
-        qfr.saveAndSubmit();
+        qfr.save();
+        qfr.submit();
+        qfr.closeChangeControl();
         ScreenRecorderUtil.stopRecord();
+
     }
 }

@@ -18,7 +18,7 @@ public class ImplementationStepdefs {
     }
 
     @And("fill in the implementation information")
-    public void fillInTheImplementationInformation() {
+    public void fillInTheImplementationInformation() throws InterruptedException {
         ip.ccRecordNo();
         ip.selectStatus();
         ip.selectAttachment();
@@ -27,6 +27,8 @@ public class ImplementationStepdefs {
 
     @Then("save and submit implementation's the information")
     public void saveAndSubmitImplementationSTheInformation() throws InterruptedException {
-        ip.saveAndSubmit();
+        ip.save();
+        ip.submit();
+        ip.closeChangeControl();
     }
 }

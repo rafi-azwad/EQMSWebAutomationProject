@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static SearchPage.ChangeControlPage.RaiseChangeControlPage.CCRecordNo;
 import static SearchPage.ChangeControlPage.RaiseChangeControlPage.CCRecordTitle;
 
 public class ChangePlanPage {
@@ -26,15 +27,16 @@ public class ChangePlanPage {
         jse.executeScript("arguments[0].click()", changePlan);
     }
 
-    public void ccRecordNo() {
+    public void ccRecordNo() throws InterruptedException {
 
         WebElement ccNo = new WebDriverWait(driver, Duration.ofSeconds(20)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@name='CC_RAISE_NO']")));
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
-        jse.executeScript("arguments[0].click()", ccNo);
+        Thread.sleep(2000);
+        Select selectCCNo = new Select(ccNo);
+        selectCCNo.selectByValue(CCRecordNo);
 
-        WebElement ccNoClick = new WebDriverWait(driver, Duration.ofSeconds(10)).
-                until(ExpectedConditions.elementToBeClickable(By.xpath("//option[contains(text(),'" +CCRecordTitle+ "')]")));
+        WebElement ccNoClick = new WebDriverWait(driver, Duration.ofSeconds(20)).
+                until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[contains(text(),'" +CCRecordNo+ "')]")));
         ccNoClick.click();
 
     }
@@ -56,12 +58,12 @@ public class ChangePlanPage {
     public void changePlanSummary() {
 
         WebElement plusIcon = new WebDriverWait(driver, Duration.ofSeconds(20)).
-                until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@ng-click='grid.appScope.addNewSummaryRow()']")));
+                until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@ng-click='grid.appScope.addNewSummaryRow()']")));
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("arguments[0].click()", plusIcon);
 
         WebElement action = new WebDriverWait(driver, Duration.ofSeconds(20)).
-                until(ExpectedConditions.elementToBeClickable(By.xpath("//textarea[@name='ACTION']")));
+                until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//textarea[@name='ACTION']")));
         action.sendKeys("Problem 01");
 
         Select responsibility = new Select(driver.findElement(By.name("RESPONSIBILITY")));
@@ -74,7 +76,7 @@ public class ChangePlanPage {
 
     }
 
-    public void selectFunctionalApproval() {
+       public void selectFunctionalApproval() {
 
         WebElement plusIcon = new WebDriverWait(driver, Duration.ofSeconds(20)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@ng-click='grid.appScope.addNewRow2()']")));
@@ -86,22 +88,32 @@ public class ChangePlanPage {
 
     }
     public void selectQualityApproval() {
+        WebElement qualityApproval = new WebDriverWait(driver, Duration.ofSeconds(10)).
+                until(ExpectedConditions.elementToBeClickable(By.xpath("//label[text()='Select Quality Approver']//following::span[3]")));
+        qualityApproval.click();
+        WebElement qualityApprovalList = new WebDriverWait(driver, Duration.ofSeconds(10)).
+                until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='Rafi (null)']")));
+        qualityApprovalList.click();
 
-        driver.findElement(By.xpath("//label[text()='Select Quality Approver']//following::span[3]")).click();
-        driver.findElement(By.xpath("//li[text()='Rafi']")).click();
 
     }
-    public void saveAndSubmit() throws InterruptedException {
+    public void save(){
 
-        WebElement save = new WebDriverWait(driver, Duration.ofSeconds(20)).
+        WebElement save = new WebDriverWait(driver, Duration.ofSeconds(10)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Save')]")));
         save.click();
+    }
+
+    public void submit() {
 
         //submit
-        WebElement submit = new WebDriverWait(driver, Duration.ofSeconds(30)).
+        WebElement submit = new WebDriverWait(driver, Duration.ofSeconds(10)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Submit')]")));
         JavascriptExecutor js = (JavascriptExecutor)driver; //org.openqa.selenium.ElementClickInterceptedException
         js.executeScript("arguments[0].click()", submit);
+
+    }
+    public void closeChangeControl() throws InterruptedException {
 
         WebElement cc =driver.findElement(By.xpath("//span[contains(text(),'Change Control')]"));
         JavascriptExecutor js1 = (JavascriptExecutor)driver; //org.openqa.selenium.ElementClickInterceptedException

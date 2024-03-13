@@ -17,14 +17,18 @@ public class ChangePlanFunctionalApprovalStepdefs {
     }
 
     @And("fill in the change plan functional approval information")
-    public void fillInTheChangePlanFunctionalApprovalInformation() {
+    public void fillInTheChangePlanFunctionalApprovalInformation() throws InterruptedException {
         cpf.ccRecordNo();
         cpf.functionalApprovalComment();
-        cpf.selectStatus();
+        cpf.selectReviseCCPlanStatus();
+        cpf.selectReviseImpactAssessmentStatus();
+        cpf.selectApprovedStatus();
     }
 
     @Then("save and submit change plan functional approval's the information")
     public void saveAndSubmitChangePlanFunctionalApprovalSTheInformation() throws InterruptedException {
-        cpf.saveAndSubmit();
+        cpf.save();
+        cpf.submit();
+        cpf.closeChangeControl();
     }
 }

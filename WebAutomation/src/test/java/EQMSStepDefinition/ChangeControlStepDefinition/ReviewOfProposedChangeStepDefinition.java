@@ -17,9 +17,11 @@ public class ReviewOfProposedChangeStepDefinition {
     }
 
     @And("fill in the review of proposed change information")
-    public void fillInTheReviewOfProposedChangeInformation() {
+    public void fillInTheReviewOfProposedChangeInformation() throws InterruptedException {
         rpp.ccRecordNo();
         rpp.reviewerComment();
+        rpp.furtherInformationRequired();
+        rpp.reviseFromDraft();
         rpp.approval();
         rpp.coordinator();
         rpp.selectImpactAssessor();
@@ -27,6 +29,8 @@ public class ReviewOfProposedChangeStepDefinition {
 
     @Then("save and submit review of proposed change's the information")
     public void saveAndSubmitReviewOfProposedChangeSTheInformation() throws InterruptedException {
-        rpp.saveAndSubmit();
+        rpp.save();
+        rpp.submit();
+        rpp.closeChangeControl();
     }
 }

@@ -20,10 +20,6 @@ public class InvestigationPage {
 
     public void selectInvestigation() {
 
-        /*  Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-          WebElement ele = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='Investigation']")));
-          ele.click();    //ElementClickInterceptedException*/
-
 
         try {
             driver.findElement(By.xpath("//*[text()='Investigation']")).click();
@@ -68,19 +64,17 @@ public class InvestigationPage {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,450)");
         //plusIcon
-        //driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[12]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/button[1]/img[1]")).click();
         driver.findElement(By.xpath("//button[@ng-click='grid.appScope.addNewCaRow()']")).click();
-
 
         Thread.sleep(2000);
 
-        driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[13]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/textarea[1]")).click();
-        driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[13]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/textarea[1]")).sendKeys("problem");
+        driver.findElement(By.name("ACTION")).click();
+        driver.findElement(By.name("ACTION")).sendKeys("problem");
 
         Select select = new Select(driver.findElement(By.name("CA_RESPONSIBILITY")));
         select.selectByVisibleText("Rafi (null)");
 
-        driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[13]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/input[1]")).click();
+        driver.findElement(By.xpath("//input[@ng-model='row.entity.TARGET_DATE']")).click();
         driver.findElement(By.xpath("//tbody/tr[2]/td[3]")).click();
 
 
@@ -107,7 +101,7 @@ public class InvestigationPage {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,500)");
 
-        WebElement plusIcon = driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[19]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[6]/div[2]/button[1]/img[1]"));
+        WebElement plusIcon = driver.findElement(By.xpath("//button[@ng-click='grid.appScope.addNewRow1()']"));
         JavascriptExecutor js = (JavascriptExecutor) driver; //ElementClickInterceptedException
         js.executeScript("arguments[0].click()", plusIcon);
 

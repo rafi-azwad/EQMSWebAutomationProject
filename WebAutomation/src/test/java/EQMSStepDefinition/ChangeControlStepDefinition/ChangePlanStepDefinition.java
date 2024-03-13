@@ -16,7 +16,7 @@ public class ChangePlanStepDefinition {
     }
 
     @And("fill in the change plan information")
-    public void fillInTheChangePlanInformation() {
+    public void fillInTheChangePlanInformation() throws InterruptedException {
         cpp.ccRecordNo();
         cpp.riskAssessment();
         cpp.changePlanSummary();
@@ -27,6 +27,9 @@ public class ChangePlanStepDefinition {
 
     @Then("save and submit Change Plan's the information")
     public void saveAndSubmitChangePlanSTheInformation() throws InterruptedException {
-        cpp.saveAndSubmit();
-         }
+        cpp.save();
+        cpp.submit();
+        cpp.closeChangeControl();
+
+    }
 }

@@ -17,13 +17,15 @@ public class ImpactAssessmentStepDefinition {
     }
 
     @And("fill in the impact assessment information")
-    public void fillInTheImpactAssessmentInformation() {
+    public void fillInTheImpactAssessmentInformation() throws InterruptedException {
         iap.ccRecordNo();
         iap.riskAssessment();
     }
 
     @Then("save and submit impact assessment's the information")
     public void saveAndSubmitImpactAssessmentSTheInformation() throws InterruptedException {
-        iap.saveAndSubmit();
+        iap.save();
+        iap.submit();
+        iap.closeChangeControl();
     }
 }

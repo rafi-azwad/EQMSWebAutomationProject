@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 public class ComplainRaisePage {
 
     public WebDriver driver;
-    Logger logger = Logger.getLogger(ComplainRaisePage.class.getName());
     public static String titleOfComplain = "complainCheckLast123";
     public ComplainRaisePage(WebDriver driver){
         this.driver = driver;
@@ -30,7 +29,7 @@ public class ComplainRaisePage {
 
         } catch (Exception e) {
             JavascriptExecutor executor = (JavascriptExecutor) driver;
-            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[text()='Complaint Raise']")));
+            executor.executeScript("arguments[0].click()", driver.findElement(By.xpath("//*[text()='Complaint Raise']")));
         }
 
 
@@ -39,11 +38,12 @@ public class ComplainRaisePage {
 
 
         driver.findElement(By.xpath("//input[@id='TITLE_OF_COMPLAINT']")).click();
-        driver.findElement(By.xpath("//input[@id='TITLE_OF_COMPLAINT']")).sendKeys(titleOfComplain);
-        //sendKeys of complain
+        driver.findElement(By.xpath("//input[@id='TITLE_OF_COMPLAINT']")).sendKeys(titleOfComplain); //sendKeys of complain
 
         //product
-        driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[1]/div[4]/div[1]/div[2]/span[1]/span[1]/span[1]")).click();
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("arguments[0].click()",driver.findElement(By.name("PRODUCT_CODE")));
+
         driver.findElement(By.xpath("//*[text()='CHBAC090 -- Chaka Ball Soap - 100gm']")).click();
 
         //receiveFrom
@@ -54,17 +54,15 @@ public class ComplainRaisePage {
         driver.findElement(By.xpath("//*[@id='NATURE_OF_COMPLAINT_CODE']")).click();
         driver.findElement(By.xpath("//*[text()='Product Quality Issue']")).click();
 
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,250)");
 
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[1]/div[13]/div[1]/div[2]/span[1]/span[1]/span[1]")).click();
-
+        jse.executeScript("arguments[0].click()", driver.findElement(By.id("SEND_TO")));
         // driver.findElement(By.xpath("//*[text()='Arman Hossain (Programmer)']")).click();
         driver.findElement(By.xpath("//*[text()='Rafi ()']")).click();
 
 
-        driver.findElement(By.xpath("//*[@type='file']")).sendKeys("C:\\Users\\Rafi\\Desktop\\eQMS\\WebAutomation\\src\\test\\resources\\File\\logo.png");
+        driver.findElement(By.xpath("//*[@type='file']")).sendKeys("C:\\Users\\Rafi\\Desktop\\eQMS\\WebAutomation\\src\\test\\resources\\File\\logo.jpg");
 
 
 

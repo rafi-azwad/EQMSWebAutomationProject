@@ -1,10 +1,10 @@
 package SearchPage.ChangeControlPage;
 
-import org.bouncycastle.oer.Switch;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -13,12 +13,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 import static SearchPage.ChangeControlPage.RaiseChangeControlPage.CCRecordNo;
-import static SearchPage.ChangeControlPage.RaiseChangeControlPage.CCRecordTitle;
-import static SearchPage.CustomerComplainPage.ComplainRaisePage.titleOfComplain;
+
 
 public class ReviewOfProposedPage {
 
     public WebDriver driver;
+    RaiseChangeControlPage rp;
     public ReviewOfProposedPage(WebDriver driver){
         this.driver = driver;
     }
@@ -29,17 +29,18 @@ public class ReviewOfProposedPage {
                 until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Review of Proposed Change']")));
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("arguments[0].click()",reviewOfProposed);
+
     }
 
-  public void ccRecordNo(){
-        System.out.println("ccRecordValue "+CCRecordNo);
+  public void ccRecordNo() throws InterruptedException {
         WebElement ccNo = new WebDriverWait(driver, Duration.ofSeconds(20)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@name='CC_RAISE_NO']")));
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
-        jse.executeScript("arguments[0].click()",ccNo);
+        Thread.sleep(2000);
+        Select selectCCNo = new Select(ccNo);
+        selectCCNo.selectByValue(CCRecordNo);
 
-       WebElement ccNoClick = new WebDriverWait(driver, Duration.ofSeconds(10)).
-              until(ExpectedConditions.elementToBeClickable(By.xpath("//option[contains(text(),'" +CCRecordTitle+ "')]")));
+       WebElement ccNoClick = new WebDriverWait(driver, Duration.ofSeconds(20)).
+              until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[contains(text(),'" +CCRecordNo+ "')]")));
        ccNoClick.click();
 
     }
@@ -53,7 +54,7 @@ public class ReviewOfProposedPage {
   }
 
 
-    public void furtherInformationRequired() throws InterruptedException {
+    public void furtherInformationRequired() {
 
         WebElement furtherInformationRequired = new WebDriverWait(driver, Duration.ofSeconds(20)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@name='REVIEW_STATUS']")));
@@ -61,39 +62,49 @@ public class ReviewOfProposedPage {
         jse.executeScript("arguments[0].click()", furtherInformationRequired);
         Select selectApproval = new Select(furtherInformationRequired);
         selectApproval.selectByValue("Further Information Required");
+        save();
+        submit();
 
-        WebElement raiseChangeControl = new WebDriverWait(driver, Duration.ofSeconds(10)).
-                until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'Raise Change Control')]")));
-        jse.executeScript("arguments[0].click()",raiseChangeControl);
-
-        WebElement search = new WebDriverWait(driver, Duration.ofSeconds(10)).
+        rp = new RaiseChangeControlPage(driver);
+        rp.raiseChangeControl();
+    }
+    public void reviseFromDraft() throws InterruptedException {
+        WebElement search = new WebDriverWait(driver, Duration.ofSeconds(20)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Search']")));
-        jse.executeScript("arguments[0].click()",search);
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("arguments[0].click()", search);
 
-        WebElement filter = new WebDriverWait(driver, Duration.ofSeconds(10)).
+        WebElement status = new WebDriverWait(driver, Duration.ofSeconds(20)).
+                until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@name='SUBMIT_STATUS']")));
+        jse.executeScript("arguments[0].click()", status);
+        Select selectStatus = new Select(status);
+        selectStatus.selectByValue("N");
+
+        WebElement filter = new WebDriverWait(driver, Duration.ofSeconds(20)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Filter']")));
-        jse.executeScript("arguments[0].click()",filter);
+        jse.executeScript("arguments[0].click()", filter);
 
-        WebElement draft = new WebDriverWait(driver, Duration.ofSeconds(10)).
-                until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='"+CCRecordTitle+"']")));
-        //jse.executeScript("arguments[0].click()",draft);
-
+        WebElement title = new WebDriverWait(driver, Duration.ofSeconds(10)).
+                until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'" +CCRecordNo+ "')]")));
         Actions actions = new Actions(driver);
-        actions.doubleClick(draft).build().perform();
+        actions.moveToElement(title).doubleClick().build().perform();
 
-        saveAndSubmit();
+        Thread.sleep(2000);
+        submit();
+        Thread.sleep(2000);
 
     }
-      public void approval() {
 
-      /*  clickReviewOfProposed();
+      public void approval() throws InterruptedException {
+
+        clickReviewOfProposed();
         ccRecordNo();
-        reviewerComment();*/
 
         WebElement approval = new WebDriverWait(driver, Duration.ofSeconds(20)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@name='REVIEW_STATUS']")));
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("arguments[0].click()", approval);
+        Thread.sleep(2000);
         Select selectApproval = new Select(approval);
         selectApproval.selectByValue("Approved");
     }
@@ -104,8 +115,8 @@ public class ReviewOfProposedPage {
         jse.executeScript("arguments[0].click()", coordinator);
         Select selectCoordinator = new Select(coordinator);
         selectCoordinator.selectByVisibleText(" Rafi ()");
-    }
 
+    }
 
 
     public void selectImpactAssessor(){
@@ -118,17 +129,23 @@ public class ReviewOfProposedPage {
         selectName.selectByVisibleText("Rafi (null)");
     }
 
-    public void saveAndSubmit() throws InterruptedException {
+    public void save(){
 
         WebElement save = new WebDriverWait(driver, Duration.ofSeconds(10)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Save')]")));
         save.click();
+    }
+
+    public void submit() {
 
         //submit
         WebElement submit = new WebDriverWait(driver, Duration.ofSeconds(10)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Submit')]")));
         JavascriptExecutor js = (JavascriptExecutor)driver; //org.openqa.selenium.ElementClickInterceptedException
         js.executeScript("arguments[0].click()", submit);
+
+    }
+    public void closeChangeControl() throws InterruptedException {
 
         WebElement cc =driver.findElement(By.xpath("//span[contains(text(),'Change Control')]"));
         JavascriptExecutor js1 = (JavascriptExecutor)driver; //org.openqa.selenium.ElementClickInterceptedException

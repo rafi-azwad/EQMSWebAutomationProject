@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -29,7 +30,7 @@ public class InitialAssessmentPage {
         } catch (Exception e) {
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             Thread.sleep(2000);
-            executor.executeScript("arguments[0].click();", driver.findElement(By.linkText("Initial Assesment")));
+            executor.executeScript("arguments[0].click()", driver.findElement(By.linkText("Initial Assesment")));
         }
     }
 
@@ -44,7 +45,7 @@ public class InitialAssessmentPage {
 
             } catch (Exception e) {
                 JavascriptExecutor executor = (JavascriptExecutor) driver;
-                executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[contains(text(), '"+complainNo+"')]")));
+                executor.executeScript("arguments[0].click()", driver.findElement(By.xpath("//*[contains(text(), '"+complainNo+"')]")));
 
                //select complain sendKeys
             }
@@ -52,16 +53,17 @@ public class InitialAssessmentPage {
             driver.findElement(By.xpath("//textarea[@id='ASSESMENT_COMMENT']")).click();
             driver.findElement(By.xpath("//textarea[@id='ASSESMENT_COMMENT']")).sendKeys("problem");
 
-            driver.findElement(By.name("STATUS")).click();
-            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//*[text()= '  Proceeding for Investigation ']"))));
-            element.click();
 
-            JavascriptExecutor jse = (JavascriptExecutor) driver;
-            jse.executeScript("window.scrollBy(0,250)");
+            WebElement status = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement((By.name("STATUS")))));
+            Select selectStatus = new Select(status);
+            selectStatus.selectByValue("Proceeding for Investigation");
 
-            driver.findElement(By.name("REVIEWED_BY")).click();
-            Thread.sleep(2000);
-            driver.findElement(By.xpath("//*[text()=' Rafi ()']")).click();
+            driver.findElement(By.xpath("//*[@type='file']")).sendKeys("C:\\Users\\Rafi\\Desktop\\eQMS\\WebAutomation\\src\\test\\resources\\File\\lion.jpg");
+
+
+            WebElement review = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement((By.name("REVIEWED_BY")))));
+            Select selectReview = new Select(review);
+            selectReview.selectByValue("200");
 
     }
 

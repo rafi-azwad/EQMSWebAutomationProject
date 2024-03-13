@@ -17,14 +17,19 @@ public class ChangePlanApprovalStepdefs {
     }
 
     @And("fill in the change plan approval information")
-    public void fillInTheChangePlanApprovalInformation() {
+    public void fillInTheChangePlanApprovalInformation() throws InterruptedException {
         cpa.ccRecordNo();
         cpa.qualityApprovalComment();
-        cpa.selectStatus();
+        cpa.selectRevisedCCPlanStatus();
+        cpa.selectImpactAssessmentStatus();
+        cpa.selectApprovedStatus();
     }
 
     @Then("save and submit change plan approval's the information")
     public void saveAndSubmitChangePlanApprovalSTheInformation() throws InterruptedException {
-        cpa.saveAndSubmit();
+        cpa.save();
+        cpa.submit();
+        cpa.closeChangeControl();
+
     }
 }

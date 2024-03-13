@@ -22,6 +22,7 @@ public class LoginStepDefinition {
         ScreenRecorderUtil.startRecord("Record of All Change Control Test");
         BrowserHelper bhp = new BrowserHelper();
         driver = bhp.chrome();
+        //driver = bhp.firefox();
         //driver = bhp.headlessBrowser();
 
     }

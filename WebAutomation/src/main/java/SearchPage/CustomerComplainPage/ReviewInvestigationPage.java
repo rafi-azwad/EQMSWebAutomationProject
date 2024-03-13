@@ -30,7 +30,7 @@ public class ReviewInvestigationPage {
 
         } catch (Exception e) {
             JavascriptExecutor executor = (JavascriptExecutor) driver;
-            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[text()='Review Investigation']")));
+            executor.executeScript("arguments[0].click()", driver.findElement(By.xpath("//*[text()='Review Investigation']")));
 
 
         }
@@ -48,7 +48,7 @@ public class ReviewInvestigationPage {
 
         } catch (Exception e) {
             JavascriptExecutor executor = (JavascriptExecutor) driver;
-            executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[contains(text(), '" + complainNo + "')]")));
+            executor.executeScript("arguments[0].click()", driver.findElement(By.xpath("//*[contains(text(), '" + complainNo + "')]")));
 
             //select complain sendKeys
         }
@@ -85,23 +85,15 @@ public class ReviewInvestigationPage {
         select.selectByVisibleText("  Approved ");
 
 
-   /*     if(furtherInv.isSelected()){
-
-            ip = new InvestigationPage(driver);
-
-        }
-        else if(approved.isSelected()){
-            fp = new FunctionalApprovalPage(driver);
-        }*/
 
     }
 
             public void selectFunctionalApproval () {
 
 
-                driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[10]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1]")).click();
+                driver.findElement(By.xpath("//div[@ng-click='toggleMenu()']")).click();
 
-                WebElement plusIcon = driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[10]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[6]/div[2]/button[1]/img[1]"));
+                WebElement plusIcon = driver.findElement(By.xpath("//button[@ng-click='grid.appScope.addNewRow2()']"));
                 JavascriptExecutor js = (JavascriptExecutor) driver; //ElementClickInterceptedException
                 js.executeScript("arguments[0].click()", plusIcon);
 
@@ -123,7 +115,7 @@ public class ReviewInvestigationPage {
                 jse.executeScript("window.scrollBy(0,300)");
 
 
-                WebElement plusIcon = driver.findElement(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[11]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[6]/div[2]/button[1]/img[1]"));
+                WebElement plusIcon = driver.findElement(By.xpath("//button[@ng-click='grid.appScope.addNewRow3()']"));
                 JavascriptExecutor js = (JavascriptExecutor) driver; //ElementClickInterceptedException
                 js.executeScript("arguments[0].click()", plusIcon);
 
@@ -132,13 +124,8 @@ public class ReviewInvestigationPage {
 
                 WebElement iName = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[11]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/select[1]")));
 
-        /* iName.click();  //qualityApprovalName
-        WebElement text = driver.findElement(By.xpath("//option[contains(text(),'Rafi (null)')]"));
-        text.click();
-        */
                 Select select = new Select(iName);
                 select.selectByVisibleText("Rafi (null)");
-
 
                 WebElement aType = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='container-wrapper']/div[1]/fieldset[1]/div[11]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[5]/select[1]")));
                 Select select2 = new Select(aType);

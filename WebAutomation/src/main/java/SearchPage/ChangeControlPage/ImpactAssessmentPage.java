@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -26,15 +27,16 @@ public class ImpactAssessmentPage {
         jse.executeScript("arguments[0].click()", impactAssessment);
     }
 
-    public void ccRecordNo() {
+    public void ccRecordNo() throws InterruptedException {
 
         WebElement ccNo = new WebDriverWait(driver, Duration.ofSeconds(20)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@name='CC_RAISE_NO']")));
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
-        jse.executeScript("arguments[0].click()", ccNo);
+        Thread.sleep(2000);
+        Select selectCCNo = new Select(ccNo);
+        selectCCNo.selectByValue(CCRecordNo);
 
-        WebElement ccNoClick = new WebDriverWait(driver, Duration.ofSeconds(10)).
-                until(ExpectedConditions.elementToBeClickable(By.xpath("//option[contains(text(),'" +CCRecordTitle+ "')]")));
+        WebElement ccNoClick = new WebDriverWait(driver, Duration.ofSeconds(20)).
+                until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[contains(text(),'" +CCRecordNo+ "')]")));
         ccNoClick.click();
 
     }
@@ -57,20 +59,23 @@ public class ImpactAssessmentPage {
 
 
     }
-    public void saveAndSubmit() throws InterruptedException {
+    public void save(){
 
-        /*JavascriptExecutor jse1 = (JavascriptExecutor) driver;
-        jse1.executeScript("window.scrollBy(0,-350)");*/
-
-        WebElement save = new WebDriverWait(driver, Duration.ofSeconds(20)).
+        WebElement save = new WebDriverWait(driver, Duration.ofSeconds(10)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Save')]")));
         save.click();
+    }
+
+    public void submit()  {
 
         //submit
-        WebElement submit = new WebDriverWait(driver, Duration.ofSeconds(30)).
+        WebElement submit = new WebDriverWait(driver, Duration.ofSeconds(10)).
                 until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Submit')]")));
         JavascriptExecutor js = (JavascriptExecutor)driver; //org.openqa.selenium.ElementClickInterceptedException
         js.executeScript("arguments[0].click()", submit);
+
+    }
+    public void closeChangeControl() throws InterruptedException {
 
         WebElement cc =driver.findElement(By.xpath("//span[contains(text(),'Change Control')]"));
         JavascriptExecutor js1 = (JavascriptExecutor)driver; //org.openqa.selenium.ElementClickInterceptedException
@@ -78,4 +83,6 @@ public class ImpactAssessmentPage {
         Thread.sleep(2000);
 
     }
-}
+
+    }
+

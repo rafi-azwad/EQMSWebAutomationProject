@@ -35,7 +35,7 @@ public class BrowserHelper {
 
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
-       // driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+       //driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         driver.get(baseURL);
         driver.manage().window().maximize();
         return driver;

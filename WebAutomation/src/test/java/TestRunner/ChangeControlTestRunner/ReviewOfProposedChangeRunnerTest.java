@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 @CucumberOptions(
         features = {"src/test/resources/eQMSFeatureFiles/"},
-        tags = "@login or @reviewOfProposedChange",
+        tags = "@login or @raiseChangeControl or @reviewOfProposedChange",
         glue = {"EQMSStepDefinition"},
         monochrome = true,
         dryRun = false,
